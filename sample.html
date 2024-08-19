@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sports E-Commerce</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .category-section, .welcome-section, .wishlist-section {
+            display: none;
+        }
+        .category-section.active, .welcome-section.active, .wishlist-section.active {
+            display: block;
+        }
+        .filter-section {
+            margin-bottom: 20px;
+        }
+        .wishlist-icon {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#" onclick="showCategory('welcome')">ATHLETIC AVENUE</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showCategory('menswear')">Men's Wear</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showCategory('womenswear')">Women's Wear</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showCategory('shoes')">Sports Shoes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showCategory('bottles')">Water Bottles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showCategory('towels')">Microfiber Towels</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showCategory('equipment')">Sports Equipment</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showCategory('wishlist')">Wishlist</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Welcome Section -->
+    <div id="welcome" class="welcome-section active">
+        <div class="container mt-4">
+            <div class="jumbotron text-center bg-light p-5 rounded">
+                <h1 class="display-4">Welcome to Sports Store</h1>
+                <p class="lead">Your one-stop shop for all your sports needs!</p>
+                <hr class="my-4">
+                <p>Explore our wide range of products including Men's and Women's sportswear, sports shoes, equipment, and much more.</p>
+            </div>
+            
+            <!-- Carousel -->
+            <div id="welcomeCarousel" class="carousel slide">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="https://static01.nyt.com/images/2020/07/21/autossell/sports-reboot-promo-still/sports-reboot-promo-still-superJumbo.jpg" class="d-block w-100" alt="Sports Image 1">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://static01.nyt.com/images/2020/07/21/autossell/sports-reboot-promo-still/sports-reboot-promo-still-superJumbo.jpg" class="d-block w-100" alt="Sports Image 2">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://media.istockphoto.com/id/1476198878/photo/different-sport-balls-and-equipment-soccer-ffotball-basketball-handball-rugby-and-volleyball.webp?b=1&s=170667a&w=0&k=20&c=H270ioYUlaayJp9YxIJW1ttGkg742WpCLMcpAz_6JtY=" class="d-block w-100" alt="Sports Image 3">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#welcomeCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#welcomeCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Categories -->
+    <div class="container mt-4">
+        <!-- Men's Wear Section -->
+        <div id="menswear" class="category-section">
+            <h2>Men's Sportswear</h2>
+            
+            <!-- Filter and Sort -->
+            <div class="filter-section">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="categoryFilter" class="form-label">Category</label>
+                        <select id="categoryFilter" class="form-select" onchange="filterProducts()">
+                            <option value="all">All</option>
+                            <option value="tshirts">T-Shirts</option>
+                            <option value="trackpants">Track Pants</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="sizeFilter" class="form-label">Size</label>
+                        <select id="sizeFilter" class="form-select" onchange="filterProducts()">
+                            <option value="all">All Sizes</option>
+                            <option value="s">S</option>
+                            <option value="m">M</option>
+                            <option value="l">L</option>
+                            <option value="xl">XL</option>
+                            <option value="2xl">2XL</option>
+                            <option value="3xl">3XL</option>
+                            <option value="4xl">4XL</option>
+                            <option value="5xl">5XL</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="priceSort" class="form-label">Sort By Price</label>
+                        <select id="priceSort" class="form-select" onchange="sortProducts()">
+                            <option value="asc">Price: Low to High</option>
+                            <option value="desc">Price: High to Low</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" id="menswearProducts">
+                <!-- Filtered and sorted products will be injected here -->
+            </div>
+        </div>
+
+        <!-- Women's Wear Section -->
+        <div id="womenswear" class="category-section">
+            <h2>Women's Sportswear</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrOxM6z4OTXIkK-qlFGizyj-klZzQfnYTYcQ&s" class="card-img-top" alt="Women's Sport Shirt">
+                        <div class="card-body">
+                            <h5 class="card-title">Women's Sport Shirt</h5>
+                            <p class="card-text">$25.00</p>
+                            <a href="#" class="btn btn-primary">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more items for Women's Wear -->
+            </div>
+        </div>
+
+        <!-- Sports Shoes Section -->
+        <div id="shoes" class="category-section">
+            <h2>Sports Shoes</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="Sports Shoes">
+                        <div class="card-body">
+                            <h5 class="card-title">Running Shoes</h5>
+                            <p class="card-text">$50.00</p>
+                            <a href="#" class="btn btn-primary">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more items for Sports Shoes -->
+            </div>
+        </div>
+
+        <!-- Water Bottles Section -->
+        <div id="bottles" class="category-section">
+            <h2>Water Bottles</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="Water Bottle">
+                        <div class="card-body">
+                            <h5 class="card-title">Water Bottle</h5>
+                            <p class="card-text">$10.00</p>
+                            <a href="#" class="btn btn-primary">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more items for Water Bottles -->
+            </div>
+        </div>
+
+        <!-- Microfiber Towels Section -->
+        <div id="towels" class="category-section">
+            <h2>Microfiber Towels</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="Microfiber Towel">
+                        <div class="card-body">
+                            <h5 class="card-title">Microfiber Towel</h5>
+                            <p class="card-text">$15.00</p>
+                            <a href="#" class="btn btn-primary">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more items for Microfiber Towels -->
+            </div>
+        </div>
+
+        <!-- Sports Equipment Section -->
+        <div id="equipment" class="category-section">
+            <h2>Sports Equipment</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="Sports Equipment">
+                        <div class="card-body">
+                            <h5 class="card-title">Tennis Racket</h5>
+                            <p class="card-text">$70.00</p>
+                            <a href="#" class="btn btn-primary">Add to Cart</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more items for Sports Equipment -->
+            </div>
+        </div>
+
+        <!-- Wishlist Section -->
+        <div id="wishlist" class="wishlist-section">
+            <h2>Wishlist</h2>
+            <div class="row" id="wishlistItems">
+                <!-- Wishlist items will be injected here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const menswearProducts = [
+            { name: 'Men\'s Sport Shirt', price: 30.00, category: 'tshirts', size: 'm', img: 'https://via.placeholder.com/150' },
+            { name: 'Men\'s Track Pants', price: 40.00, category: 'trackpants', size: 'l', img: 'https://via.placeholder.com/150' },
+            // Add more products here
+        ];
+
+        let wishlist = [];
+
+        function showCategory(category) {
+            const sections = document.querySelectorAll('.category-section, .welcome-section, .wishlist-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+                if (section.id === category) {
+                    section.classList.add('active');
+                    if (category === 'menswear') {
+                        displayProducts(menswearProducts);
+                    } else if (category === 'wishlist') {
+                        displayWishlist();
+                    }
+                }
+            });
+        }
+
+        function displayProducts(products) {
+            const container = document.getElementById('menswearProducts');
+            container.innerHTML = '';
+
+            products.forEach(product => {
+                const card = `
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="${product.img}" class="card-img-top" alt="${product.name}">
+                            <div class="card-body">
+                                <h5 class="card-title">${product.name}</h5>
+                                <p class="card-text">$${product.price.toFixed(2)}</p>
+                                <a href="#" class="btn btn-primary" onclick="addToWishlist('${product.name}')">Add to Wishlist</a>
+                                <a href="#" class="btn btn-secondary">Add to Cart</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += card;
+            });
+        }
+
+        function displayWishlist() {
+            const container = document.getElementById('wishlistItems');
+            container.innerHTML = '';
+
+            wishlist.forEach(item => {
+                const card = `
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="${item.img}" class="card-img-top" alt="${item.name}">
+                            <div class="card-body">
+                                <h5 class="card-title">${item.name}</h5>
+                                <p class="card-text">$${item.price.toFixed(2)}</p>
+                                <a href="#" class="btn btn-secondary">Remove from Wishlist</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += card;
+            });
+        }
+
+        function addToWishlist(productName) {
+            const product = menswearProducts.find(p => p.name === productName);
+            if (product && !wishlist.some(item => item.name === productName)) {
+                wishlist.push(product);
+                displayWishlist();
+            }
+        }
+
+        function filterProducts() {
+            const categoryFilter = document.getElementById('categoryFilter').value;
+            const sizeFilter = document.getElementById('sizeFilter').value;
+            const filteredProducts = menswearProducts.filter(product => {
+                return (categoryFilter === 'all' || product.category === categoryFilter) &&
+                       (sizeFilter === 'all' || product.size === sizeFilter);
+            });
+            displayProducts(filteredProducts);
+        }
+
+        function sortProducts() {
+            const sortBy = document.getElementById('priceSort').value;
+            const sortedProducts = [...menswearProducts].sort((a, b) => {
+                return sortBy === 'asc' ? a.price - b.price : b.price - a.price;
+            });
+            displayProducts(sortedProducts);
+        }
+    </script>
+</body>
+</html>
