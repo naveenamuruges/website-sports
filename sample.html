@@ -18,6 +18,11 @@
         .wishlist-icon {
             cursor: pointer;
         }
+        .card-img-top {
+        height: 700px; /* Adjust the height as needed */
+        width: 100%; /* Ensures the image takes up the full width of the card */
+        object-fit: cover; /* Ensures the image covers the entire area without distortion */
+    }
     </style>
 </head>
 <body>
@@ -192,22 +197,36 @@
         </div>
 
         <!-- Microfiber Towels Section -->
-        <div id="towels" class="category-section">
-            <h2>Microfiber Towels</h2>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card">
-                        <img src="https://via.placeholder.com/150" class="card-img-top" alt="Microfiber Towel">
-                        <div class="card-body">
-                            <h5 class="card-title">Microfiber Towel</h5>
-                            <p class="card-text">$15.00</p>
-                            <a href="#" class="btn btn-primary">Add to Cart</a>
-                        </div>
-                    </div>
-                </div>
+        
                 <!-- Add more items for Microfiber Towels -->
-            </div>
+                <div class="filter-section">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="categoryFilter" class="form-label">Category</label>
+                            <select id="categoryFilter" class="form-select" onchange="filterProducts()">
+                                <option value="all">All</option>
+                            </select>
+                        </div>
+         
+        <div class="col-md-4">
+            <label for="sizeFilter" class="form-label">Size</label>
+            <select id="sizeFilter" class="form-select" onchange="filterProducts()">
+                <option value="all">All Sizes</option>
+                <option value="small">Small</option>
+                <option value="medium">Medium</option>
+                <option value="large">Large</option>
+                
+            </select>
         </div>
+        <div class="col-md-4">
+            <label for="priceSort" class="form-label">Sort By Price</label>
+            <select id="priceSort" class="form-select" onchange="sortProducts()">
+                <option value="asc">Price: Low to High</option>
+                <option value="desc">Price: High to Low</option>
+            </select>
+        </div>
+    </div>
+</div>
 
         <!-- Sports Equipment Section -->
         <div id="equipment" class="category-section">
@@ -240,10 +259,38 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         const menswearProducts = [
-            { name: 'Men\'s Sport Shirt', price: 30.00, category: 'tshirts', size: 'm', img: 'https://via.placeholder.com/150' },
-            { name: 'Men\'s Track Pants', price: 40.00, category: 'trackpants', size: 'l', img: 'https://via.placeholder.com/150' },
-            // Add more products here
+            { name: 'Men\'s Sport Shirt', price: 600, category: 'tshirts', size: 'm', img: 'https://www.jumpusa.in/cdn/shop/products/c5570b19_2_fea0f562-9e03-4b85-a985-f3abf53b410a.jpg?v=1676286005' },
+            { name: 'Men\'s Sport Shirt', price: 700, category: 'tshirts', size: 's', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkvF6Q1hvW-zp_gnfHgjCWB6Uh05BRoDwWOQ&s' },
+            { name: 'Men\'s Sport Shirt', price: 900, category: 'tshirts', size: 'l', img: 'https://www.raindot.in/cdn/shop/files/DarkSalmonMandarinCollarT-Shirt_2048x2048.jpg?v=1698496841' },
+            { name: 'Men\'s Sport Shirt', price: 700, category: 'tshirts', size: 'xl', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqL5U8jwss8Z6aij-mpuaKK42Orr7Ky8vvvA&s'},
+            { name: 'Men\'s Sport Shirt', price: 1200, category: 'tshirts', size: '2xl', img: 'https://sportsqvest.com/cdn/shop/products/MTEE006_-_Front_1200x.jpg?v=1689941451' },
+            { name: 'Men\'s Sport Shirt', price: 1000, category: 'tshirts', size: '3xl', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0wwgxxDho7tYXBYfsugxlt4ZAR6FqY3_DJA&s' },
+            { name: 'Men\'s Sport Shirt', price: 550, category: 'tshirts', size: '4xl', img: 'https://img0.junaroad.com/uiproducts/19243036/zoom_1-1674912966.jpg' },
+            { name: 'Men\'s Sport Shirt', price: 750, category: 'tshirts', size: '5xl', img: 'https://www.uzarus.com/cdn/shop/products/1_e28380fc-4b90-4f84-9c96-dbd4c0e9c879_1059x.jpg?v=1649935610' },
+            
+            { name: 'Men\'s Track Pants', price: 800, category: 'trackpants', size: 'xl', img: 'https://www.jiomart.com/images/product/original/441139592_jetblack/men-track-pants-with-insert-pockets-model-441139592_jetblack-0-202408061915.jpg?im=Resize=(500,630)' },
+            { name: 'Men\'s Track Pants', price: 500, category: 'trackpants', size: '2xl', img: 'https://www.jiomart.com/images/product/original/441139592_jetblack/men-track-pants-with-insert-pockets-model-441139592_jetblack-0-202408061915.jpg?im=Resize=(600,750)' },
+            { name: 'Men\'s Track Pants', price: 500, category: 'trackpants', size: '2xl', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgHbpkP0aKG7PSELBsjLH9ZpMhbIcNVcpmIw&s' },
+            { name: 'Men\'s Track Pants', price: 400, category: 'trackpants', size: '3xl', img: 'https://assets.myntassets.com/dpr_1.5,q_60,w_400,c_limit,fl_progressive/assets/images/23718926/2024/3/22/678c50fe-90e3-4fca-bb78-731bc4e1d0d41711091462477-ADIDAS-Originals-Men-Track-Pants-2621711091461971-1.jpg' },
+            { name: 'Men\'s Track Pants', price: 680,  category: 'trackpants', size: '4xl', img: 'https://beyoung.in/blog/wp-content/uploads/2019/09/track-pant-853x1024.jpg' },
+            { name: 'Men\'s Track Pants', price: 450, category: 'trackpants', size: '5xl', img: 'https://adn-static1.nykaa.com/nykdesignstudio-images/pub/media/catalog/product/6/a/6a1334fAEBNTPL3_1.jpg?tr=w-512' },
+            { name: 'Men\'s Track Pants', price: 800, category: 'trackpants', size: 'l', img: 'https://www.tistabene.com/cdn/shop/files/JGR-0118A.jpg?v=1702892067' },
+            { name: 'Men\'s Track Pants', price: 1200, category: 'trackpants', size: 'm', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiwB76EkAZ-4NqI9yOk26Lug_7xWjvVQW8tQ&s' },
+            { name: 'Men\'s Track Pants', price: 250, category: 'trackpants', size: 's', img: 'https://www.fashionbeans.com/wp-content/uploads/2022/04/Screen-Shot-2022-06-06-at-11.59.36.png' },
         ];
+        
+            const towels = [
+    { name: 'towels', price: 600,category:'all', size: 'small', img: 'https://www.jiomart.com/images/product/original/rvqye6uauq/nfaf-microfiber-bath-towels-for-men-women-absorbent-large-size-towel-for-bathroom-spa-hotel-soft-quick-drying-resistant-premium-standard-stripes-bath-towel-for-unisex-men-women-kids-pack-of-3-40-x-40-cm-green-absorbent-colour-product-images-orvqye6uauq-p601146985-0-202305031740.jpg?im=Resize=(420,420)' },
+    { name: 'towels', price: 500,category:'all', size: 'medium', img: 'https://sobby.in/cdn/shop/products/800gsm-microfiber-coral-fleece-cloth-car-clean_e511c518-b23f-49f8-87d3-6d50d396ffb5.jpg?v=1648143896&width=1445' },
+    { name: 'towels', price: 300,category:'all', size: 'small', img: 'https://img.bebeautiful.in/www-bebeautiful-in/Microfiber-Towels-for-drying-your-Hair_mobilehome.jpg' },
+    { name: 'towels', price: 800,category:'all', size: 'large', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8ryr3sk1oDrUsGZAFY8bpeg4DT9G2KBSanw&s' },
+    { name: 'towels', price: 400,category:'all', size: 'medium', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRyx0giBE-pWUt1KB1tsrp5qEaIA4PbIZmvw&s' },
+    { name: 'towels', price: 700,category:'all', size: 'medium', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStTUk_oVvbh52HGXZpe3FOl5ZXJEcJbLIJAQ&s' },
+
+];
+
+
+      
 
         let wishlist = [];
 
@@ -330,6 +377,11 @@
             });
             displayProducts(sortedProducts);
         }
+
+
+        
+
+
     </script>
 </body>
 </html>
